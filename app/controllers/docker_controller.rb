@@ -1,10 +1,14 @@
 class DockerController < ApplicationController
-  def home
+  def dashboard
     @docker_version = Docker.version
     @docker_info = Docker.info
-    container = Docker::Container.all(:all => true)
-    images = Docker::Image.all
-    @container_data = container
-    @images_data = images
+  end
+
+  def containers
+    @containers = Docker::Container.all(:all => true)
+  end
+
+  def images
+    @images = Docker::Image.all
   end
 end

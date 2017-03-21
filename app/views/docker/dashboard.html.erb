@@ -1,0 +1,57 @@
+
+<div class="container-fluid">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading"><i class="fa fa-tachometer" aria-hidden="true"></i> Node Info</div>
+      <table class="table">
+        <tr>
+          <td>Name</td>
+          <td class="ng-binding"><%= @docker_info["Name"] %></td>
+        </tr>
+        <tr>
+          <td>Version</td>
+          <td class="ng-binding"><%= @docker_version["Version"] %></td>
+        </tr>
+        <tr>
+          <td>CPU</td>
+          <td class="ng-binding"><%= @docker_info["NCPU"] %></td>
+        </tr>
+        <tr>
+          <td>Memory</td>
+          <td class="ng-binding"><%= @docker_info["MemTotal"] / (1024 * 1024) %> MB</td>
+        </tr>
+      </table>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading"><i class="fa fa-tasks" aria-hidden="true"></i> Swarm Info</div>
+      <table class="table">
+        <tr>
+          <td>Name</td>
+          <td class="ng-binding"><%= @docker_info["Name"] %></td>
+        </tr>
+        <tr>
+          <td>Version</td>
+          <td class="ng-binding"><%= @docker_version["Version"] %></td>
+        </tr>
+        <tr>
+          <td>CPU</td>
+          <td class="ng-binding"><%= @docker_info["NCPU"] %></td>
+        </tr>
+        <tr>
+          <td>Memory</td>
+          <td class="ng-binding"><%= @docker_info["MemTotal"] / (1024 * 1024) %> MB</td>
+        </tr>
+      </table>
+    </div>
+    <h3>Info</h3>
+    <%= @docker_info %>
+    <h4>Total containers</h4>
+    <%= @docker_info["Containers"] %>
+    <h4>total containers</h4>
+    <%= @docker_info["ContainersRunning"] %>
+    <h3>Container</h3>
+    <%= @container_data %>
+    <h3>Images</h3>
+    <%= @images_data %>
+  </div>
+</div>
