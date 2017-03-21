@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Watchstander</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div>Watchstander, track your Docker activity</div>
+    <div class="Docker">
+      <h3>Versions</h3>
+      <%= @docker_version["Version"] %>
+      <h3>Info</h3>
+      <%= @docker_info %>
+      <h3>Number of CPU</h3>
+      <%= @docker_info["NCPU"] %>
+      <h3>Memory</h3>
+      <%= @docker_info["MemTotal"] / (1024 * 1024) %> MB
+      <h4>Total containers</h4>
+      <%= @docker_info["Containers"] %>
+      <h4>total containers</h4>
+      <%= @docker_info["ContainersRunning"] %>
+      <h3>Container</h3>
+      <%= @container_data %>
+      <h3>Images</h3>
+      <%= @images_data %>
+    </div>
+  </body>
+</html>
