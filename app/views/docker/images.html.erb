@@ -4,17 +4,20 @@
       <div class="panel-heading"><i class="fa fa-clone" aria-hidden="true"></i> Images</div>
       <table class="table">
         <tr>
-          <td>Name</td>
           <td>ID</td>
-          <td>Scope</td>
-          <td>Driver</td>
-          <td>IPAM Driver</td>
-          <td>IPAM Subnet</td>
-          <td>IPAM Gateway</td>
+          <td>Tags</td>
+          <td>Size</td>
         </tr>
+        <% @images.each do |image| %>
+          <tr>
+            <td><%= image.info["id"] %></td>
+            <td><%= image.info["RepoTags"].join(", ") %></td>
+            <td><%= Filesize.from(image.info["Size"].to_s + " B").pretty %></td>
+          </tr>
+        <% end %>
       </table>
     </div>
-    <h3>Images</h3>
-    <%= @images %>
+    <h3>Images - DEBUG</h3>
+    <%= debug @images %>
   </div>
 </div>

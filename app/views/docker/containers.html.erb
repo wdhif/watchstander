@@ -9,11 +9,21 @@
           <td>Image</td>
           <td>IP Address</td>
           <td>Published Ports</td>
-          <td>Ownership</td>
         </tr>
+        <% @containers.each do |container| %>
+          <tr>
+            <td><%= container.info["State"] %></td>
+            <td><%= container.info["Names"].join(", ")[1..-1] %></td>
+            <td><%= container.info["Image"] %></td>
+            <td>
+              <%= container.info["NetworkSettings"]["Networks"]["bridge"]["IPAddress"].presence || "No IP Address"  %>
+            </td>
+            <td><%= container.info["Ports"].join(" ").presence || "No ports specified" %></td>
+          </tr>
+        <% end %>
       </table>
     </div>
-    <p>Containers</p>
-    <%= @containers %>
+    <h3>Containers - DEBUG</h3>
+    <%= debug @containers %>
   </div>
 </div>
