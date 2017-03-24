@@ -24,27 +24,20 @@
     </div>
     <div class="panel panel-default">
       <div class="panel-heading"><i class="fa fa-tasks" aria-hidden="true"></i> Swarm Info</div>
+      <div class="panel-heading"><%= @docker_info["Swarm"]["NodeID"].presence || "This node is not part of a Swarm cluster" %></div>
       <table class="table">
         <tr>
-          <td>Name</td>
-          <td class="ng-binding"><%= @docker_info["Name"] %></td>
+          <td>Node ID</td>
+          <td class="ng-binding"><%= @docker_info["Swarm"]["NodeID"].presence || "None" %></td>
         </tr>
         <tr>
-          <td>Version</td>
-          <td class="ng-binding"><%= @docker_version["Version"] %></td>
-        </tr>
-        <tr>
-          <td>CPU</td>
-          <td class="ng-binding"><%= @docker_info["NCPU"] %></td>
-        </tr>
-        <tr>
-          <td>Memory</td>
-          <td class="ng-binding"><%= Filesize.from(@docker_info["MemTotal"].to_s + " B").pretty%></td>
+          <td>Nodes in the cluster</td>
+          <td class="ng-binding"><%= @docker_info["Swarm"]["Nodes"].presence || "None" %></td>
         </tr>
       </table>
     </div>
     <div class="row">
-      <div class="col-lg-6">
+      <div class="col-lg-4">
         <div class="panel panel-info">
           <div class="panel-heading">Total Containers</div>
           <div class="panel-body">
@@ -52,7 +45,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-4">
         <div class="panel panel-success">
           <div class="panel-heading">Running Containers</div>
           <div class="panel-body">
@@ -60,7 +53,18 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="panel panel-info">
+            <div class="panel-heading">Images</div>
+            <div class="panel-body">
+              <%= @docker_info["Images"] %>
+            </div>
+          </div>
+        </div>
     </div>
+    <h3>Version - DEBUG</h3>
+    <%= debug @docker_version %>
     <h3>Info - DEBUG</h3>
     <%= debug @docker_info %>
   </div>
