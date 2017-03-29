@@ -9,6 +9,7 @@
           <td>Image</td>
           <td>IP Address</td>
           <td>Published Ports</td>
+          <td>Actions</td>
         </tr>
         <% @containers.each do |container| %>
           <tr>
@@ -16,9 +17,24 @@
             <td><%= container.info["Names"].join(", ")[1..-1] %></td>
             <td><%= container.info["Image"] %></td>
             <td>
-              <%= container.info["NetworkSettings"]["Networks"]["bridge"]["IPAddress"].presence || "No IP Address"  %>
+              <%= container.info["NetworkSettings"]["Networks"]["bridge"]["IPAddress"].presence || "No IP Address" %>
             </td>
             <td><%= container.info["Ports"].join(" ").presence || "No ports specified" %></td>
+            <td>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Actions
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><%= link_to 'Start', {action: 'start_container', id: container.info['id'] }, method: 'post' %></li>
+                  <li><%= link_to 'Stop', {action: 'stop_container', id: container.info['id'] }, method: 'post' %></li>
+                  <li><%= link_to 'Kill', {action: 'kill_container', id: container.info['id'] }, method: 'post' %></li>
+                  <li role="separator" class="divider"></li>
+                  <li><%= link_to 'Delete', {action: 'delete_container', id: container.info['id'] }, method: 'post' %></li>
+                </ul>
+              </div>
+            </td>
           </tr>
         <% end %>
       </table>
